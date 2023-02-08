@@ -1,10 +1,10 @@
-:root{
+:root {
     --even: beige;
     --odd: azure;
     --primary: aliceblue;
-    --tes: #F5F5DC;
+    --tes: #f5f5dc;
 }
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -13,12 +13,12 @@
     text-decoration: none;
     list-style-type: none;
 }
-html{
+html {
     scroll-behavior: smooth;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Calibri, Arial, Helvetica, sans-serif;
     overflow-x: hidden;
 }
 
@@ -39,7 +39,7 @@ nav {
     right: 0;
     /* width: 100%; */
     /* height: 75px; */
-    padding: 1.4rem 7%;
+    padding: 1.4rem 10%;
     align-items: center;
     position: fixed;
     z-index: 1000;
@@ -67,21 +67,17 @@ nav {
 }
 
 .navigation li a:hover {
-    background-color: bisque;
+    background-color: #ffffff;
     color: #333;
     border-radius: 15px;
-    transition: all ease-in-out .2s;
+    transition: all ease-in-out 0.2s;
+}
+.openbtn {
+    display: none;
 }
 
-
-
-
-
-
-
-
 .home {
-    background-image: url(img/hero_img.jpg);
+    background-image: url(assets/thumbnail/hero.jpg);
     min-height: 100vh;
     background-repeat: no-repeat;
     background-position: center;
@@ -89,16 +85,18 @@ nav {
 }
 
 .hero {
-    display: flex;
-    align-items: center;
+    /* display: flex; */
+    /* align-items: center; */
     min-height: 100vh;
-    padding: 1.4rem 7%;
+    padding: 1.4rem 10%;
     /* background-color: rgb(51, 51, 51, .3); */
-    background: linear-gradient(to bottom, rgba(51, 51, 51, .3)0%,rgba(51, 51, 51, .3)80%, var(--tes));
+    background: linear-gradient(to bottom, rgba(51, 51, 51, 0.3) 0%, rgba(51, 51, 51, 0.3) 80%, var(--tes));
 }
 
-
-.hero-text>* {
+.hero-text {
+    /* background-color: aquamarine; */
+    position: absolute;
+    bottom: 150px;
     color: whitesmoke;
     text-shadow: 0 0 20px #333;
 }
@@ -106,13 +104,19 @@ nav {
 .hero-text h1 {
     font-size: 4rem;
 }
-.hero-text p {
-    font-size: 6rem;
+.hero-text a {
+    background-color: #0055ff;
+    font-weight: 600;
+    color: aliceblue;
+    display: inline-block;
+    margin-top: 20px;
+    padding: 1em;
+    border-radius: 20px;
+    font-size: 1.5rem;
 }
-
-
-
-
+.hero-text a:hover {
+    background-color: #4080ff;
+}
 
 /* ABOUT US */
 
@@ -120,28 +124,30 @@ nav {
 .product {
     padding: 7.5rem 0 1.4rem;
 }
-.about{
-    background: linear-gradient(to bottom, var(--tes) 0%, var(--tes)90%, var(--primary));
+
+.about {
+    background: linear-gradient(to bottom, var(--tes) 0%, var(--tes) 90%, var(--primary));
     margin-bottom: 6rem;
 }
 
-.about h2{
+.about h2 {
     text-align: center;
-    font-size: 2rem;
+    font-size: 2.3rem;
     margin-bottom: 3rem;
 }
 
-.about-content{
+.about-content {
     display: flex;
     flex: wrap;
     margin: 20px auto;
     justify-content: space-between;
-    width: 90%;
+    width: 80%;
     padding: 10px;
-    border-radius: 10px;
+    background-color: #fff;
+    border-radius: 2%;
 }
 
-.about-content div{
+.about-content div {
     margin: 10px;
 }
 .about-text {
@@ -150,118 +156,235 @@ nav {
 }
 
 .about-text h3 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     line-height: 50px;
 }
 
 .about-image {
+    max-width: 800px;
     flex: 1 1 30rem;
 }
 
 .about-image img {
     width: 100%;
+    border-radius: 5px;
 }
-
-
-
-
 
 /* PRODUCT */
 
-.product h2{
+.product h2 {
     text-align: center;
-    font-size: 2rem;
-    /* line-height: 5rem; */
+    font-size: 2.3rem;
     margin-bottom: 1rem;
 }
 
-.product h3{
+.product h3 {
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     font-weight: 400;
     margin-bottom: 1.5rem;
 }
 
 .product {
-    /* background-color: #333; */
     width: 90%;
     margin: 20px auto;
     align-items: center;
     text-align: center;
 }
 
-.product-grid{
-    max-width: 1500px;
-    margin: 20px auto;
+.product-grid {
+    /* background-color: #333; */
+    max-width: 1350px;
+    margin: 50px auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.product-item{
-    margin: 1rem ;
-    padding: 3px;
+.product-item {
+    margin: 1rem;
+    box-shadow: 1px 1px 5px #aaaaaa;
+}
+
+.product-item,
+.product-item img {
+    border-radius: 5px;
 }
 
 .product-item img {
-    border-radius: 3px;
     max-width: 100%;
-    aspect-ratio: 1/1;
+    aspect-ratio: 4/3;
     object-fit: cover;
-    height: 240px;
-}
-.product-item:hover{
-    transition: all ease .2s;
-    transform: scale(1.2);
-    /* transform: translateY(-8px); */
+    height: 200px;
 }
 
-
-
-
-.contact{
+.contact {
     text-align: center;
 }
 
-
-
-footer{
+footer {
     padding: 2rem 0;
     text-align: center;
     background-color: #333;
     color: aliceblue;
 }
-.nav-footer a{
+.nav-footer a {
     padding: 1rem 0;
     color: aliceblue;
 }
-.copyright a{
+.copyright a {
     padding: 1rem 0;
     color: aliceblue;
 }
 
+/* -----------------------PRODUCT.php-------------- */
 
+.btn-add {
+    /* position: absolute; */
+    background-color: #0055ff;
+    font-weight: 600;
+    color: aliceblue;
+    padding: 1em;
+    border-radius: 7px;
+    font-size: 1rem;
+    /* right: 15%;
+    top: 23%; */
+}
+.btn-change {
+    background-color: #11ff00;
+    font-weight: 600;
+    color: aliceblue;
+    padding: 1em;
+    border-radius: 7px;
+    font-size: 1rem;
+}
+.btn-delete {
+    background-color: #ff0000;
+    font-weight: 600;
+    color: aliceblue;
+    padding: 1em;
+    border-radius: 7px;
+    font-size: 1rem;
+}
+.btn-grey {
+    background-color: #989898;
+    font-weight: 600;
+    color: aliceblue;
+    padding: 1em;
+    border-radius: 7px;
+    font-size: 1rem;
+}
+/* AKHIR PRODUK */
 
+.btn-add:hover {
+    background-color: #4080ff;
+}
+.btn-grey:hover {
+    color: #888888;
+    outline: currentColor solid 1px;
+    background-color: #ededed;
+}
+.btn-change:hover {
+    background-color: #7dff4a;
+}
+.btn-delete:hover {
+    background-color: #fd4848;
+}
 
+.product-properties {
+    /* max-width: 1350px; */
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* background-color: #333; */
+}
+.option select {
+    /* background-color: #333; */
+    padding: 0.3rem 1rem;
+    border-radius: 5px;
+    border: 1px solid #989898;
+}
+/* .search {
+    border: 1px solid #989898;
+} */
+.search input {
+    padding: 0.3rem 3rem;
+    border: 1px solid #989898;
+}
+.search button {
+    padding: 0.3rem 0;
+    border: 1px solid #989898;
+}
 
+/* Detail */
+.detail {
+    width: 90%;
+    margin: 120px auto;
+}
+.deskripsi {
+    background-color: #333;
+}
+.atas {
+    display: flex;
+    max-width: 1350px;
+    flex-wrap: wrap;
+    flex: 1 1 28rem;
+}
+.atas img {
+    max-width: 100%;
+    object-fit: cover;
+}
+.detail a {
+    display: inline-block;
+    margin: 5px;
+}
 
+/* Edit */
 
-/* RESPONSIVE BREAKPOINT */
+.item {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 1rem 0;
+}
+.item input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccced1;
+    font-size: 1rem;
+}
+.item select {
+    margin-bottom: 2rem;
+    padding: 0.8rem;
+    border: 2px solid #0055ff;
+    border-radius: 7px;
+}
+.item .thumbnail {
+    display: inline-block;
+}
+.detail .button {
+    margin: 1.3rem 0;
+}
+
+/*----------------- RESPONSIVE BREAKPOINT ----------------- */
 
 /* Laptop */
-@media (max-width: 1366px){
-    html{
+@media (max-width: 1366px) {
+    html {
         font-size: 75%;
     }
 }
 
 /* Tablet */
 @media (max-width: 768px) {
-    html{
+    html {
         font-size: 62.5%;
     }
     .navigation {
         display: none;
+    }
+    .openbtn {
+        display: inline;
     }
     .about-content {
         flex-wrap: wrap;
@@ -270,18 +393,43 @@ footer{
         width: 100%;
         margin: 10px auto;
     }
-    .about-image img{
+    .about-image img {
         height: 22rem;
         object-fit: cover;
     }
-    .product-grid{
+    .product-grid {
         width: 100%;
     }
 }
 
+@media (max-width: 640px) {
+    .product {
+        width: 90%;
+        margin: 1rem auto;
+    }
+    .product-item img {
+        aspect-ratio: 7/6;
+        height: 200px;
+    }
+}
+
 /* Handphone */
-@media (max-width: 450px) {
-    html{
+@media (max-width: 576px) {
+    .product-item img {
+        max-width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        height: 200px;
+    }
+    .product-item {
+        margin: 0.5rem;
+    }
+}
+@media (max-width: 479px) {
+    html {
         font-size: 62.5%;
+    }
+    .product-item img {
+        height: 150px;
     }
 }
