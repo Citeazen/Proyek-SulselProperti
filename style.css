@@ -380,8 +380,30 @@ footer {
     html {
         font-size: 62.5%;
     }
+    nav {
+        justify-content: center;
+    }
     .navigation {
-        display: none;
+        position: fixed;
+        display: flex;
+        font-size: 2.6rem;
+        /* margin: 50px auto; */
+        width: 200px;
+        /* height: 80vh; */
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(51, 51, 51, 0.7);
+    }
+    .navigation li {
+        background-color: #0055ff;
+        /* margin: 50px auto; */
+        padding-right: 10px;
+    }
+
+    .navigation li a {
+        padding: 10px 15px;
+        color: aliceblue;
     }
     .openbtn {
         display: inline;

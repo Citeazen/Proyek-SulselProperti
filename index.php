@@ -18,6 +18,7 @@ $categories = getAllCategories();
 </head>
 
 <body>
+    <button class="openbtn" onclick="mobel()"><i class="fa fa-bars"></i></button>
     <nav>
         <div class="logo"><a href="index.html">Sulsel Properti</a></div>
         <ul class="navigation">
@@ -32,7 +33,6 @@ $categories = getAllCategories();
                 <li><a href="logout.php">Logout</a></li>
             <?php endif; ?>
         </ul>
-        <button class="openbtn" onclick="mobel()"><i class="fa fa-bars"></i></button>
     </nav>
     <!-- tes -->
     <section id="home" class="section home odd">
@@ -100,14 +100,6 @@ $categories = getAllCategories();
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script> -->
     <script>
         /* Set the width of the sidebar to 250px (show it) */
-        function mobel() {
-            var x = document.getElementById("navigation");
-            if (x.style.display === "block") {
-                x.style.display = "none";
-            } else {
-                x.style.display = "block";
-            }
-        }
     </script>
     <script src="fontawesome/js/all.min.js"
         integrity="sha512-rpLlll167T5LJHwp0waJCh3ZRf7pO6IT1+LZOhAyP6phAirwchClbTZV3iqL3BMrVxIYRbzGTpli4rfxsCK6Vw=="
