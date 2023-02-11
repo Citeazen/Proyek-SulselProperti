@@ -1,15 +1,15 @@
 <?php
-  session_start();
+session_start();
 
-  if( !isset($_SESSION['login']) ) :
-    header('Location: login.php');
-    exit();
-  endif;
+if (!isset($_SESSION['login'])):
+  header('Location: login.php');
+  exit();
+endif;
 
-  $_SESSION['login'] = NULL;
-  $_SESSION['user_id'] = NULL;
+$_SESSION['login'] = NULL;
+$_SESSION['user_id'] = NULL;
 
-  session_destroy();
-  session_unset();
+session_destroy();
+session_unset();
 
-  header('Location: index.php');
+header('Location: index.php');

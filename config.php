@@ -111,6 +111,7 @@ function addProduct($data)
   $addresses = $data['addresses'];
   $prices = $data['prices'];
   $descriptions = $data['descriptions'];
+  $opt_imgs = $data['opt_imgs'];
   // $images = $data['images'];
   $user_id = 2;
 
@@ -124,7 +125,7 @@ function addProduct($data)
   endif;
 
   // jalankan query
-  mysqli_query($koneksi, "INSERT INTO products VALUES (NULL, '$title' ,'$user_id', '$category_id', '$addresses', '$prices', '$descriptions', '$thumbnail', 1)");
+  mysqli_query($koneksi, "INSERT INTO products VALUES (NULL, '$title' ,'$user_id', '$category_id', '$addresses', '$prices', '$descriptions', '$thumbnail', '$opt_imgs', 1)");
 
   if (mysqli_affected_rows($koneksi) > 0):
     // return true kalo berhasil ditambah
@@ -165,6 +166,14 @@ function deleteDesc($id)
     preg_match('/src="([^"]+)/i', $image, $src);
     unlink(substr($src[1], 0));
   }
+  // Ambil tag img dari teks
+  preg_match_all('/<img[^>]+>/i', $product['opt_imgs'], $images);
+
+  // Hapus file gambar dari direktori
+  foreach ($images[0] as $image) {
+    preg_match('/src="([^"]+)/i', $image, $src);
+    unlink(substr($src[1], 0));
+  }
 
   // Tutup koneksi database
   mysqli_query($koneksi, $query);
@@ -176,6 +185,7 @@ function deleteDesc($id)
     return false;
   endif;
 }
+
 
 function deleteProduct($id)
 {
@@ -209,6 +219,22 @@ function deleteProduct($id)
 }
 
 
+function display_img_src($content)
+{
+  preg_match_all('/<img.*?src="(.*?)".*?>/', $content, $matches);
+
+  $img_srcs = $matches[1];
+
+  $output = '';
+  foreach ($img_srcs as $img_src) {
+    $output .= "<img src='$img_src'>";
+  }
+
+  return $output;
+}
+
+
+
 
 function changeProduct($data)
 {
@@ -219,11 +245,11 @@ function changeProduct($data)
   $addresses = $data['addresses'];
   $prices = $data['prices'];
   $descriptions = $data['descriptions'];
+  $opt_imgs = $data['opt_imgs'];
   // $images = $data['images'];
 
   // query basic
-  $query = "UPDATE products SET title = '$title', category_id = '$category_id', prices = '$prices', addresses = '$addresses', descriptions = '$descriptions'
-    ";
+  $query = "UPDATE products SET title = '$title', category_id = '$category_id', prices = '$prices', addresses = '$addresses', descriptions = '$descriptions', opt_imgs = '$opt_imgs'";
   // , images = '$images'
 
   // cek apakah fotonya diganti atau tidak

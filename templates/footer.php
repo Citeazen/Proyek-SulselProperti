@@ -10,9 +10,6 @@
     <p>Copyright by <a href="#">Rumah Website</a> | &copy; 2023.</p>
   </div>
 </footer>
-<script src="fontawesome/js/all.min.js"
-  integrity="sha512-rpLlll167T5LJHwp0waJCh3ZRf7pO6IT1+LZOhAyP6phAirwchClbTZV3iqL3BMrVxIYRbzGTpli4rfxsCK6Vw=="
-  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>

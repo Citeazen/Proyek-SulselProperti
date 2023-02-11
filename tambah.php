@@ -6,7 +6,7 @@ if (!isset($_SESSION['login'])):
   exit();
 endif;
 
-if (isset($_POST['submit'])):
+if (isset($_POST['tambah'])):
   if (addProduct($_POST)):
     // berhasil
     echo "<script>
@@ -23,8 +23,7 @@ include_once 'templates/navbar.php';
 include_once 'templates/header.php';
 ?>
 
-<script src="ckeditor/ckeditor.js"></script>
-
+<script src="assets/ckeditor/ckeditor.js"></script>
 <title>Tambah Produk</title>
 
 <body>
@@ -46,7 +45,7 @@ include_once 'templates/header.php';
             <input type="text" id="title" placeholder="Isi lokasi" name="addresses">
           </div>
           <div class="item">
-            <label for="category_id">Pilih Kategori</label>
+            <label for="category_id"><strong>Pilih Kategori :</strong></label>
             <select class="form-select" name="category_id" id="category_id">
               <?php foreach ($categories as $category): ?>
                 <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
@@ -59,15 +58,19 @@ include_once 'templates/header.php';
           </div>
           <div class="item">
             <label for="descriptions">Deskripsi</label>
-            <textarea id="summernote" name="descriptions"></textarea>
+            <textarea id="descriptions" name="descriptions"></textarea>
           </div>
           <div class="item">
             <label for="thumbnail">Foto Thumbnail</label>
             <input type="file" name="thumbnail" id="thumbnail" required>
           </div>
+          <div class="item">
+            <label for="descriptions">Gambar Tambahan <strong>(Opsional)</strong></label>
+            <textarea id="opt_imgs" name="opt_imgs"></textarea>
+          </div>
           <div class="button">
             <a class="btn-grey" onclick="history.back()">Kembali</a>
-            <button type="submit" class="btn-add" name="submit">Tambah Produk</button>
+            <button type="submit" class="btn-add" name="tambah">Tambah Produk</button>
           </div>
         </div>
       </form>
@@ -82,16 +85,29 @@ include_once 'templates/header.php';
     filebrowserUploadMethod: "form"
   });
 </script>
+<script>
+  CKEDITOR.replace('opt_imgs', {
+    toolbar: [
+      {
+        name: 'clipboard',
+        items: ['Undo', 'Redo']
+      },
+      {
+        name: 'insert',
+        items: ['Image']
+      },
+      {
+        name: 'tools',
+        items: ['Maximize']
+      }
+    ],
 
-<!-- <script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js"></script>
-  <script>
-    function createCKEditor(element) {
-      ClassicEditor
-        .create(element)
-        .catch(error => {
-          console.error(error);
-        });
-    } -->
-<!-- // </script> -->
+    removePlugins: 'about,basicstyles,enterkey,entities,floatingspace,format,horizontalrule,htmlwriter,indent,indentblock,indentlist,justify,list,liststyle,magicline,mathjax,pagebreak,pastefromword,pastetext,preview,print,removeformat,resize,save,scayt,showblocks,showborders,smiley,sourcearea,specialchar,stylescombo,tab,templates,wsc',
+
+    filebrowserUploadUrl: 'uploadimg.php',
+    filebrowserUploadMethod: "form"
+  });
+
+</script>
 
 <?php include_once 'templates/footer.php'; ?>

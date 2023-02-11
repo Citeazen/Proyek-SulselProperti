@@ -26,7 +26,7 @@ if (isset($_POST['submit'])):
       </script>";
     // gagal
   else:
-    echo "<script>
+    "<script>
         alert('Produk kamu gagal diubah');
         location.href = 'product.php';
         </script>";
@@ -41,18 +41,18 @@ include_once 'templates/header.php';
 include_once 'templates/navbar.php';
 ?>
 <script src="ckeditor/ckeditor.js"></script>
-<title>Ubah Produk</title>
+<title>Ubah Data</title>
 
 <body>
   <div class="detail">
     <!-- content -->
-    <h1>Ubah Data Produk</h1>
+    <h1>Ubah Data Properti</h1>
     <div class="data-edit-menu">
       <form action="" method="POST" enctype="multipart/form-data">
         <div class="items-data">
           <input type="hidden" name="id" value="<?= $product->id ?>">
           <div class="item">
-            <label for="title">Judul Produk</label>
+            <label for="title">Title</label>
             <input type="text" id="title" placeholder="Isi judul Produk" name="title" value="<?= $product->title ?>">
           </div>
           <div class="item">
@@ -61,7 +61,7 @@ include_once 'templates/navbar.php';
               value="<?= $product->addresses ?>">
           </div>
           <div class="item">
-            <label for="category_id">Pilih Kategori :</label>
+            <label for="category_id"><strong>Pilih Kategori :</strong></label>
             <select name="category_id" id="category_id">
               <?php foreach ($categories as $category): ?>
                 <option value="<?= $category['id'] ?>" <?php if ($category['id'] == $product->category_id):
@@ -88,6 +88,10 @@ include_once 'templates/navbar.php';
               <img src="<?= $product->thumbnail ?>" alt="<?= $product->title ?>" style="height: 150px;">
               <input type="file" name="thumbnail" id="thumbnail">
             </div>
+            <div class="item">
+              <label for="opt_imgs">Gambar Tambahan <strong>(Opsional)</strong></label>
+              <textarea id="opt_imgs" name="opt_imgs"><?= $product->opt_imgs ?></textarea>
+            </div>
           </div>
           <div class="button">
             <a class="btn-grey" onclick="history.back()">Kembali</a>
@@ -105,17 +109,29 @@ include_once 'templates/navbar.php';
     filebrowserUploadMethod: "form"
   });
 </script>
-<!-- <script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js"></script>
-  <script>
-    function createCKEditor(element) {
-      ClassicEditor
-        .create(element)
-        .catch(error => {
-          console.error(error);
-        });
-    } -->
-<!-- // createCKEditor(document.querySelector('#prices'));
-  // createCKEditor(document.querySelector('#descriptions')); -->
-<!-- // </script> -->
+<script>
+  CKEDITOR.replace('opt_imgs', {
+    toolbar: [
+      {
+        name: 'clipboard',
+        items: ['Undo', 'Redo']
+      },
+      {
+        name: 'insert',
+        items: ['Image']
+      },
+      {
+        name: 'tools',
+        items: ['Maximize']
+      }
+    ],
+
+    removePlugins: 'about,basicstyles,enterkey,entities,floatingspace,format,horizontalrule,htmlwriter,indent,indentblock,indentlist,justify,list,liststyle,magicline,mathjax,pagebreak,pastefromword,pastetext,preview,print,removeformat,resize,save,scayt,showblocks,showborders,smiley,sourcearea,specialchar,stylescombo,tab,templates,wsc',
+
+    filebrowserUploadUrl: 'uploadimg.php',
+    filebrowserUploadMethod: "form"
+  });
+
+</script>
 
 <?php include_once 'templates/footer.php'; ?>

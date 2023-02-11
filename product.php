@@ -49,24 +49,16 @@ include_once 'templates/navbar.php';
           <h4>Alamat :
             <?= $product['addresses'] ?>
           </h4>
-          <?php if (is_login()): ?>
-            <a href="ubah-produk.php?id=<?= $product['id'] ?>">Ubah</a>
-            <a href="hapus-produk.php?id=<?= $product['id'] ?>" onclick="return confirm('Apakah anda yakin??')">Hapus</a>
-          <?php endif; ?>
+          <div class="product-options">
+            <?php if (is_login()): ?>
+              <a class="btn-add" href="ubah-produk.php?id=<?= $product['id'] ?>"><i class="fa-solid fa-pen"></i></a>
+              <a class="btn-delete" href="hapus-produk.php?id=<?= $product['id'] ?>"
+                onclick="return confirm('Apakah anda yakin??')"><i class="fa-solid fa-trash"></i></a>
+            <?php endif; ?>
+          </div>
         </li>
       <?php endforeach; ?>
     </ul>
     </div>
   </section>
-  <script>
-    /* Set the width of the sidebar to 250px (show it) */
-    function mobel() {
-      var x = document.getElementById("navigation");
-      if (x.style.display === "block") {
-        x.style.display = "none";
-      } else {
-        x.style.display = "block";
-      }
-    }
-  </script>
   <?php include_once 'templates/footer.php'; ?>
