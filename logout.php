@@ -6,6 +6,7 @@ if (!isset($_SESSION['login'])):
   exit();
 endif;
 
+
 $_SESSION['login'] = NULL;
 $_SESSION['user_id'] = NULL;
 

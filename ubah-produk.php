@@ -6,6 +6,11 @@ if (!isset($_SESSION['login'])):
   exit();
 endif;
 
+if (!is_admin()):
+  header('Location: product.php');
+  exit();
+endif;
+
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 if ($id == null):
   header('HTTP/1.1 403 Forbidden');
@@ -40,7 +45,7 @@ $product = getDetailProduct();
 include_once 'templates/header.php';
 include_once 'templates/navbar.php';
 ?>
-<script src="ckeditor/ckeditor.js"></script>
+<script src="assets/ckeditor/ckeditor.js"></script>
 <title>Ubah Data</title>
 
 <body>
@@ -94,8 +99,8 @@ include_once 'templates/navbar.php';
             </div>
           </div>
           <div class="button">
-            <a class="btn-grey" onclick="history.back()">Kembali</a>
-            <button type="submit" class="btn-change" name="submit">Ubah Produk</button>
+            <a class="btn-grey" onclick="history.back()"> Kembali</a>
+            <button type="submit" class="btn-change" name="submit"> Ubah Data</button>
           </div>
         </div>
       </form>
@@ -103,35 +108,10 @@ include_once 'templates/navbar.php';
   </div>
 </body>
 <!-- end content -->
-<script>
-  CKEDITOR.replace('descriptions', {
-    filebrowserUploadUrl: "uploadimg.php",
-    filebrowserUploadMethod: "form"
-  });
-</script>
-<script>
-  CKEDITOR.replace('opt_imgs', {
-    toolbar: [
-      {
-        name: 'clipboard',
-        items: ['Undo', 'Redo']
-      },
-      {
-        name: 'insert',
-        items: ['Image']
-      },
-      {
-        name: 'tools',
-        items: ['Maximize']
-      }
-    ],
-
-    removePlugins: 'about,basicstyles,enterkey,entities,floatingspace,format,horizontalrule,htmlwriter,indent,indentblock,indentlist,justify,list,liststyle,magicline,mathjax,pagebreak,pastefromword,pastetext,preview,print,removeformat,resize,save,scayt,showblocks,showborders,smiley,sourcearea,specialchar,stylescombo,tab,templates,wsc',
-
-    filebrowserUploadUrl: 'uploadimg.php',
-    filebrowserUploadMethod: "form"
-  });
-
-</script>
-
 <?php include_once 'templates/footer.php'; ?>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    ckedit_desc();
+    ckedit_imgs();
+  });
+</script>

@@ -6,6 +6,11 @@ if (!isset($_SESSION['login'])):
   exit();
 endif;
 
+if (!is_admin()):
+  header('Location: product.php');
+  exit();
+endif;
+
 if (isset($_POST['tambah'])):
   if (addProduct($_POST)):
     // berhasil
@@ -79,35 +84,12 @@ include_once 'templates/header.php';
 </body>
 
 <!-- end content -->
+<script src="script.js"></script>
 <script>
-  CKEDITOR.replace('descriptions', {
-    filebrowserUploadUrl: "uploadimg.php",
-    filebrowserUploadMethod: "form"
+  document.addEventListener("DOMContentLoaded", function () {
+    ckedit_desc();
+    ckedit_imgs();
   });
-</script>
-<script>
-  CKEDITOR.replace('opt_imgs', {
-    toolbar: [
-      {
-        name: 'clipboard',
-        items: ['Undo', 'Redo']
-      },
-      {
-        name: 'insert',
-        items: ['Image']
-      },
-      {
-        name: 'tools',
-        items: ['Maximize']
-      }
-    ],
-
-    removePlugins: 'about,basicstyles,enterkey,entities,floatingspace,format,horizontalrule,htmlwriter,indent,indentblock,indentlist,justify,list,liststyle,magicline,mathjax,pagebreak,pastefromword,pastetext,preview,print,removeformat,resize,save,scayt,showblocks,showborders,smiley,sourcearea,specialchar,stylescombo,tab,templates,wsc',
-
-    filebrowserUploadUrl: 'uploadimg.php',
-    filebrowserUploadMethod: "form"
-  });
-
 </script>
 
 <?php include_once 'templates/footer.php'; ?>

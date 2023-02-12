@@ -9,6 +9,18 @@ function is_login()
     return false;
   endif;
 }
+function is_admin()
+{
+  if (is_login() and isset($_SESSION['admin'])):
+    if ($_SESSION['admin']):
+      return true;
+    else:
+      return false;
+    endif;
+  else:
+    return false;
+  endif;
+}
 
 $koneksi = mysqli_connect('localhost', 'root', '', 'sulsel_properti');
 
@@ -112,8 +124,11 @@ function addProduct($data)
   $prices = $data['prices'];
   $descriptions = $data['descriptions'];
   $opt_imgs = $data['opt_imgs'];
-  // $images = $data['images'];
-  $user_id = 2;
+  if (isset($_SESSION['user_id'])):
+    $user_id = $_SESSION['user_id'];
+  else:
+    $user_id = 2;
+  endif;
 
   // upload image
   $thumbnail = upload($_FILES['thumbnail']);
@@ -246,11 +261,9 @@ function changeProduct($data)
   $prices = $data['prices'];
   $descriptions = $data['descriptions'];
   $opt_imgs = $data['opt_imgs'];
-  // $images = $data['images'];
 
   // query basic
   $query = "UPDATE products SET title = '$title', category_id = '$category_id', prices = '$prices', addresses = '$addresses', descriptions = '$descriptions', opt_imgs = '$opt_imgs'";
-  // , images = '$images'
 
   // cek apakah fotonya diganti atau tidak
   if ($_FILES['thumbnail']['error'] === 0):
@@ -293,6 +306,7 @@ function login()
     if (password_verify($_POST['password'], $row['password'])):
       $_SESSION['login'] = true;
       $_SESSION['user_id'] = $row['id'];
+      $_SESSION['admin'] = $row['is_admin'];
       return true;
     else:
       return false;
@@ -319,7 +333,7 @@ function register()
     if ($row == NULL):
       // username tersedia / username belum kepake
       $password = password_hash($password, PASSWORD_DEFAULT);
-      $query = "INSERT INTO users VALUES (NULL, '$name', '$username', '$password', NULL, 1)";
+      $query = "INSERT INTO users VALUES (NULL, '$name', '$username', '$password', NULL, 0, 1)";
       mysqli_query($koneksi, $query);
       if (mysqli_affected_rows($koneksi) > 0):
         echo "<script>alert('registrasi berhasil. Silahkan login.'); location.href='login.php'</script>";
