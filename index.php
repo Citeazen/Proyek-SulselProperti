@@ -19,10 +19,10 @@ include_once 'templates/header.php';
             <li><a href="#product">Produk</a></li>
             <li><a href="#contact">Kontak</a></li>
             <?php if (!is_login()): ?>
-                <li><a href="login.php">Login</a></li>
-                <li><a href="register.php">Register</a></li>
+                    <li><a href="login.php">Login</a></li>
+                    <li><a href="register.php">Register</a></li>
             <?php else: ?>
-                <li><a href="logout.php">Logout</a></li>
+                    <li><a href="logout.php">Logout</a></li>
             <?php endif; ?>
         </ul>
     </nav>
@@ -48,7 +48,7 @@ include_once 'templates/header.php';
                 </h4>
             </div>
             <div class="about-image">
-                <img src="assets/thumbnail/4.jpg" alt="About Us" />
+                <img class="menuimg" src="assets/thumbnail/4.jpg" alt="About Us" />
             </div>
         </div>
     </section>
@@ -64,14 +64,16 @@ include_once 'templates/header.php';
             <div class="product-grid-main">
                 <ul class="product-grid">
                     <?php foreach (array_slice($products, 0, 4) as $product): ?>
-                        <li class="product-item">
-                            <img src="<?= $product['thumbnail'] ?>" alt="<?= $product['title'] ?>">
-                            <h4 class="product-name"><a href="detail.php?id=<?= $product['id'] ?>"><?= $product['title'] ?></a>
-                            </h4>
-                            <p class="product-price">
-                                <?= $product['prices'] ?>
-                            </p>
-                        </li>
+                            <li class="product-item">
+                                <a href="detail.php?id=<?= $product['id'] ?>">
+                                    <img class="menuimg" src="<?= $product['thumbnail'] ?>" alt="<?= $product['title'] ?>">
+                                </a>
+                                <h4 class="product-name"><a href="detail.php?id=<?= $product['id'] ?>"><?= $product['title'] ?></a>
+                                </h4>
+                                <p class="product-price">
+                                    <?= $product['prices'] ?>
+                                </p>
+                            </li>
                     <?php endforeach; ?>
                 </ul>
             </div>
@@ -82,14 +84,16 @@ include_once 'templates/header.php';
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur iste, quae eos incidunt ratione
             dignissimos soluta itaque aliquam impedit cum!</p>
         <ul class="social-icons">
-            <li><a href=""><i class="fa-brands fa-facebook"></i></a></li>
-            <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
-            <li><a href=""><i class="fa-brands fa-whatsapp"></i></a></li>
-            <li><a href=""><i class="fa-solid fa-phone"></i></a></li>
+            <li><a href=""><i class="fa-brands fa-facebook"></i><span>Facebook</span></a></li>
+            <li><a href=""><i class="fa-brands fa-instagram"></i><span>Instagram</span></a></li>
+            <li><a href=""><i class="fa-brands fa-whatsapp"></i><span>Whatsapp</span></a></li>
+            <li><a href=""><i class="fa-solid fa-phone"></i><span>Telp</span></a></li>
         </ul>
     </section>
     <script src="script.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", toggleNavbar);
+        blockImages("menuimg");
     </script>
+
     <?php include_once 'templates/footer.php'; ?>

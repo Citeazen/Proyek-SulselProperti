@@ -42,7 +42,9 @@ include_once 'templates/header.php'; ?>
   <ul class="product-grid">
     <?php foreach ($products as $product): ?>
       <li class="product-item">
-        <img src="<?= $product['thumbnail'] ?>" alt="<?= $product['title'] ?>">
+        <a href="detail.php?id=<?= $product['id'] ?>">
+          <img class="product-imgs" src="<?= $product['thumbnail'] ?>" alt="<?= $product['title'] ?>">
+        </a>
         <h3 class="product-name">
           <a href="detail.php?id=<?= $product['id'] ?>"><?= $product['title'] ?></a>
         </h3>
@@ -63,4 +65,8 @@ include_once 'templates/header.php'; ?>
     <?php endforeach; ?>
   </ul>
 </section>
+<script src="script.js"></script>
+<script>
+  blockImages("product-imgs");
+</script>
 <?php include_once 'templates/footer.php'; ?>

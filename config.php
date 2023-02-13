@@ -242,7 +242,7 @@ function display_img_src($content)
 
   $output = '';
   foreach ($img_srcs as $img_src) {
-    $output .= "<img src='$img_src'>";
+    $output .= "<img class='product-imgs' src='$img_src'>";
   }
 
   return $output;

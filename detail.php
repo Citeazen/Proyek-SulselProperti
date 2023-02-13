@@ -27,7 +27,7 @@ include_once 'templates/header.php';
     </div>
     <div class="image-carousel">
       <div class="owl-carousel owl-theme">
-        <img src="<?= $product->thumbnail ?>" alt="<?= $product->title ?>">
+        <img class="product-imgs" src="<?= $product->thumbnail ?>" alt="<?= $product->title ?>">
         <?php
         $product_id = $_GET['id'];
         // query data dari tabel products
@@ -57,6 +57,7 @@ include_once 'templates/header.php';
     <?= $product->descriptions ?>
   </div>
 </div>
+<script src="script.js"></script>
 <script src="assets/vendors/jquery.min.js"></script>
 <script src="assets/owlcarousel/owl.carousel.js"></script>
 <script>
@@ -71,6 +72,7 @@ include_once 'templates/header.php';
       mouseDrag: false
     })
   });
+  addImageModal("product-imgs");
 </script>
 
 
