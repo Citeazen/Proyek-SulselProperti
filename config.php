@@ -3,21 +3,21 @@ session_start();
 
 function is_login()
 {
-  if (isset($_SESSION['login'])):
+  if (isset($_SESSION['login'])) :
     return true;
-  else:
+  else :
     return false;
   endif;
 }
 function is_admin()
 {
-  if (is_login() and isset($_SESSION['admin'])):
-    if ($_SESSION['admin']):
+  if (is_login() and isset($_SESSION['admin'])) :
+    if ($_SESSION['admin']) :
       return true;
-    else:
+    else :
       return false;
     endif;
-  else:
+  else :
     return false;
   endif;
 }
@@ -28,13 +28,13 @@ function getAllProducts()
 {
   global $koneksi;
   $query = "SELECT * FROM vw_products WHERE title LIKE'%%'";
-  if (isset($_GET['search'])):
+  if (isset($_GET['search'])) :
     $search = $_GET['search'];
     $query = "SELECT * FROM vw_products WHERE title LIKE '%$search%'";
   endif;
-  if (isset($_GET['category'])):
+  if (isset($_GET['category'])) :
     $category = $_GET['category'];
-    if ($category != ""):
+    if ($category != "") :
       $query .= " AND category_id = '$category'";
     endif;
   endif;
@@ -48,14 +48,14 @@ function getAllProducts()
 
 function getDetailProduct()
 {
-  if (isset($_GET['id'])):
+  if (isset($_GET['id'])) :
     $id = $_GET['id'];
     global $koneksi;
     $query = "SELECT * FROM vw_products WHERE id=$id";
     $result = mysqli_query($koneksi, $query);
     $row = mysqli_fetch_object($result);
     return $row;
-  else:
+  else :
     return null;
   endif;
 }
@@ -80,7 +80,7 @@ function upload($image)
   $error = $image['error'];
 
   // cek apakah filenya ada atau tidak
-  if ($error == 4):
+  if ($error == 4) :
     echo "<script>
             alert('Gambar harus ada!.');
           </script>";
@@ -91,7 +91,7 @@ function upload($image)
   $imageFormatValid = ['jpg', 'jpeg', 'png', 'webp', 'bmp'];
   $imageFormat = explode('.', $fileName);
   $imageFormat = strtolower(end($imageFormat)); // JPEG => jpeg
-  if (!in_array($imageFormat, $imageFormatValid)):
+  if (!in_array($imageFormat, $imageFormatValid)) :
     echo "<script>
             alert('File harus gambar!.');
           </script>";
@@ -99,7 +99,7 @@ function upload($image)
   endif;
 
   // cek file size
-  if ($fileSize > 2000000):
+  if ($fileSize > 2000000) :
     echo "<script>
             alert('Ukuran gambar maksimal 2MB!.');
           </script>";
@@ -124,9 +124,9 @@ function addProduct($data)
   $prices = $data['prices'];
   $descriptions = $data['descriptions'];
   $opt_imgs = $data['opt_imgs'];
-  if (isset($_SESSION['user_id'])):
+  if (isset($_SESSION['user_id'])) :
     $user_id = $_SESSION['user_id'];
-  else:
+  else :
     $user_id = 2;
   endif;
 
@@ -134,7 +134,7 @@ function addProduct($data)
   $thumbnail = upload($_FILES['thumbnail']);
 
   // cek apakah validasinya lolos atau tidak
-  if (!$thumbnail):
+  if (!$thumbnail) :
     // validasinya gak lolos
     return false;
   endif;
@@ -142,10 +142,10 @@ function addProduct($data)
   // jalankan query
   mysqli_query($koneksi, "INSERT INTO products VALUES (NULL, '$title' ,'$user_id', '$category_id', '$addresses', '$prices', '$descriptions', '$thumbnail', '$opt_imgs', 1)");
 
-  if (mysqli_affected_rows($koneksi) > 0):
+  if (mysqli_affected_rows($koneksi) > 0) :
     // return true kalo berhasil ditambah
     return true;
-  else:
+  else :
     // return false kalo gagal ditambah
     return false;
   endif;
@@ -192,10 +192,10 @@ function deleteDesc($id)
 
   // Tutup koneksi database
   mysqli_query($koneksi, $query);
-  if (mysqli_affected_rows($koneksi) > 0):
+  if (mysqli_affected_rows($koneksi) > 0) :
     // return true kalo berhasil dihapus
     return true;
-  else:
+  else :
     // return false kalo gagal dihapus
     return false;
   endif;
@@ -210,7 +210,7 @@ function deleteProduct($id)
 
   $oldThumbnail = $product->thumbnail;
   // kalo ada foto lama maka hapus
-  if (file_exists($oldThumbnail) and $oldThumbnail != 'assets/thumbnail/thumb.jpg'):
+  if (file_exists($oldThumbnail) and $oldThumbnail != 'assets/thumbnail/thumb.jpg') :
     unlink($oldThumbnail);
   endif;
 
@@ -224,10 +224,10 @@ function deleteProduct($id)
 
   // jalankan query delete
   mysqli_query($koneksi, $query);
-  if (mysqli_affected_rows($koneksi) > 0):
+  if (mysqli_affected_rows($koneksi) > 0) :
     // return true kalo berhasil dihapus
     return true;
-  else:
+  else :
     // return false kalo gagal dihapus
     return false;
   endif;
@@ -249,8 +249,6 @@ function display_img_src($content)
 }
 
 
-
-
 function changeProduct($data)
 {
   global $koneksi;
@@ -266,12 +264,12 @@ function changeProduct($data)
   $query = "UPDATE products SET title = '$title', category_id = '$category_id', prices = '$prices', addresses = '$addresses', descriptions = '$descriptions', opt_imgs = '$opt_imgs'";
 
   // cek apakah fotonya diganti atau tidak
-  if ($_FILES['thumbnail']['error'] === 0):
+  if ($_FILES['thumbnail']['error'] === 0) :
     $product = getDetailProduct();
     $oldThumbnail = $product->thumbnail;
     $newThumbnail = upload($_FILES['thumbnail']);
     // kalo ada foto lama maka hapus
-    if (file_exists($oldThumbnail) and $oldThumbnail != 'assets/thumbnail/thumb.jpg'):
+    if (file_exists($oldThumbnail) and $oldThumbnail != 'assets/thumbnail/thumb.jpg') :
       unlink($oldThumbnail);
     endif;
     $query .= ", thumbnail = '$newThumbnail'";
@@ -283,10 +281,10 @@ function changeProduct($data)
   // jalankan query
   mysqli_query($koneksi, $query);
 
-  if (mysqli_affected_rows($koneksi) > 0):
+  if (mysqli_affected_rows($koneksi) > 0) :
     // return true kalo berhasil ditambah
     return true;
-  else:
+  else :
     // return false kalo gagal ditambah
     return false;
   endif;
@@ -301,17 +299,17 @@ function login()
   // cek apakah username bener atau enggak
   $result = mysqli_query($koneksi, "SELECT * FROM users WHERE username = '$username'");
   $row = mysqli_fetch_assoc($result);
-  if ($row !== NULL and $row):
+  if ($row !== NULL and $row) :
     // cek apakah password bener atau enggak
-    if (password_verify($_POST['password'], $row['password'])):
+    if (password_verify($_POST['password'], $row['password'])) :
       $_SESSION['login'] = true;
       $_SESSION['user_id'] = $row['id'];
       $_SESSION['admin'] = $row['is_admin'];
       return true;
-    else:
+    else :
       return false;
     endif;
-  else:
+  else :
     return false;
   endif;
 }
@@ -325,28 +323,27 @@ function register()
   $password = $_POST['password'];
   $password_confirm = $_POST['password_confirm'];
 
-  if ($password === $password_confirm):
+  if ($password === $password_confirm) :
     // kalo konfirmasi password bener
     // apakah username nya sudah terdaftar atau belum
     $result = mysqli_query($koneksi, "SELECT * FROM users WHERE username = '$username'");
     $row = mysqli_fetch_assoc($result);
-    if ($row == NULL):
+    if ($row == NULL) :
       // username tersedia / username belum kepake
       $password = password_hash($password, PASSWORD_DEFAULT);
       $query = "INSERT INTO users VALUES (NULL, '$name', '$username', '$password', NULL, 0, 1)";
       mysqli_query($koneksi, $query);
-      if (mysqli_affected_rows($koneksi) > 0):
+      if (mysqli_affected_rows($koneksi) > 0) :
         echo "<script>alert('registrasi berhasil. Silahkan login.'); location.href='login.php'</script>";
-      else:
+      else :
         echo "<script>alert('registrasi gagal!')</script>";
       endif;
-    else:
+    else :
       // username nya tidak tersedia / kepake
       echo "<script>alert('username tidak tersedia!!')</script>";
     endif;
-  else:
+  else :
     // kalo konfirmasi password salah
     echo "<script>alert('konfirmasi password salah!!')</script>";
   endif;
-
 }

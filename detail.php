@@ -46,22 +46,22 @@ include_once 'templates/header.php';
     </div>
   </div>
   <div class="edit">
-    <?php if (is_login() && is_admin()): ?>
+    <?php if (is_login() && is_admin()) : ?>
       <a class="btn-change" href="ubah-produk.php?id=<?= $product->id ?>"><i class="fa-solid fa-pen"></i>Ubah Data</a>
-      <a class="btn-delete" onclick="return confirm('Apakah anda yakin??')"
-        href="hapus-produk.php?id=<?= $product->id ?> "><i class="fa-solid fa-trash"></i>Hapus</a>
+      <a class="btn-delete" onclick="return confirm('Apakah anda yakin??')" href="hapus-produk.php?id=<?= $product->id ?> "><i class="fa-solid fa-trash"></i>Hapus</a>
     <?php endif; ?>
   </div>
   <div class="deskripsi">
     <h1>Deskripsi</h1>
     <?= $product->descriptions ?>
   </div>
+  <div class="spacing"></div>
 </div>
 <script src="script.js"></script>
 <script src="assets/vendors/jquery.min.js"></script>
 <script src="assets/owlcarousel/owl.carousel.js"></script>
 <script>
-  $(document).ready(function () {
+  $(document).ready(function() {
     $('.owl-carousel').owlCarousel({
       items: 1,
       margin: 1000,

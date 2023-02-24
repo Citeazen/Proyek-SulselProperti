@@ -93,10 +93,10 @@ include_once 'templates/navbar.php';
               <img src="<?= $product->thumbnail ?>" alt="<?= $product->title ?>" style="height: 150px;">
               <input type="file" name="thumbnail" id="thumbnail">
             </div>
-            <div class="item">
+          </div>
+          <div class="item">
               <label for="opt_imgs">Gambar Tambahan <strong>(Opsional)</strong></label>
               <textarea id="opt_imgs" name="opt_imgs"><?= $product->opt_imgs ?></textarea>
-            </div>
           </div>
           <div class="button">
             <a class="btn-grey" onclick="history.back()"> Kembali</a>
@@ -106,12 +106,12 @@ include_once 'templates/navbar.php';
       </form>
     </div>
   </div>
-</body>
 <!-- end content -->
-<?php include_once 'templates/footer.php'; ?>
+<script src="script.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     ckedit_desc();
     ckedit_imgs();
   });
 </script>
+<?php include_once 'templates/footer.php'; ?>

@@ -16,6 +16,40 @@ function toggleNavbar() {
     });
 }
 
+function setActiveNavbarMenu() {
+    const currentLocation = location.pathname;
+    const navigationLinks = document.querySelectorAll(".navigation a");
+
+    for (const link of navigationLinks) {
+        if (link.href.endsWith(currentLocation)) {
+            link.classList.add("active");
+        }
+    }
+}
+
+function onScrollActive() {
+    const sections = document.querySelectorAll("section");
+    const navItems = document.querySelectorAll("nav ul.navigation li a");
+    const navHeight = document.querySelector("nav").offsetHeight;
+
+    window.addEventListener("scroll", () => {
+        let current = "";
+        sections.forEach((section) => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= sectionTop - navHeight && pageYOffset < sectionTop + sectionHeight - navHeight) {
+                current = section.getAttribute("id");
+            }
+        });
+        navItems.forEach((item) => {
+            item.classList.remove("active");
+            if (item.getAttribute("href").includes(current)) {
+                item.classList.add("active");
+            }
+        });
+    });
+}
+
 function blockImages(className) {
     var images = document.getElementsByClassName(className);
 
@@ -80,8 +114,18 @@ function addImageModal(img) {
 // CKEDITOR
 function ckedit_desc() {
     CKEDITOR.replace("descriptions", {
-        filebrowserUploadUrl: "uploadimg.php",
+        // extraPlugins: 'imageuploader'
+        filebrowserBrowseUrl: "ck-browse.php",
+        filebrowserUploadUrl: "ck-uploadimg.php",
+        // filebrowserImageUploadUrl: "uploadimg.php?type=image",
+        // filebrowserImage_removeUnused: true,
         filebrowserUploadMethod: "form",
+
+        //     on: {
+        //     fileUploadRequest: function (evt) {
+        //         evt.data.requestData.used_images = document.getElementById('used_images').value;
+        //     }
+        // }
     });
 }
 
@@ -100,12 +144,30 @@ function ckedit_imgs() {
                 name: "tools",
                 items: ["Maximize"],
             },
+            {
+                name: "tools",
+                items: ["Source"],
+            },
         ],
 
-        removePlugins:
-            "about,basicstyles,enterkey,entities,floatingspace,format,horizontalrule,htmlwriter,indent,indentblock,indentlist,justify,list,liststyle,magicline,mathjax,pagebreak,pastefromword,pastetext,preview,print,removeformat,resize,save,scayt,showblocks,showborders,smiley,sourcearea,specialchar,stylescombo,tab,templates,wsc",
+        // removePlugins:
+        //     "imgbrowse,about,basicstyles,enterkey,entities,floatingspace,format,horizontalrule,htmlwriter,indent,indentblock,indentlist,justify,list,liststyle,magicline,mathjax,pagebreak,pastefromword,pastetext,preview,print,removeformat,resize,save,scayt,showblocks,showborders,smiley,sourcearea,specialchar,stylescombo,tab,templates,wsc",
 
-        filebrowserUploadUrl: "uploadimg.php",
+        // filebrowserBrowseUrl: '/assets/ckeditor/plugins/imgbrowse/imgbrowse.php',
+        // extraPlugins: 'imageuploader'
+        filebrowserBrowseUrl: "ck-browse.php",
+        // extraPlugins: 'zsuploader',
+        filebrowserUploadUrl: "ck-uploadimg.php",
+        // filebrowserImageUploadUrl: "uploadimg.php?type=image",
+        // filebrowserImage_removeUnused: true,
         filebrowserUploadMethod: "form",
+
+        //    extraPlugins: 'zsuploader',
+        //     on: {
+        // fileUploadRequest: function (evt) {
+        //     evt.data.requestData.used_images = document.getElementById('used_images').value;
+        // }
+
+        // }
     });
 }

@@ -22,7 +22,7 @@ include_once 'templates/header.php'; ?>
   <form action="product.php" method="GET">
     <div class="product-properties">
       <div class="option">
-        <select name="category">
+        <select name="category" class="category-select">
           <option value="">-- Pilih Kategori --</option>
           <?php foreach ($categories as $category): ?>
             <option value="<?= $category['id'] ?>" <?php if ($category['id'] == $categoryId):
@@ -33,12 +33,11 @@ include_once 'templates/header.php'; ?>
         </select>
       </div>
       <div class="search">
-        <input name="search" type="text" placeholder="Telusuri properti" value="<?= $search ?>">
+        <input name="search" type="text" placeholder="Telusuri properti" value="<?= htmlspecialchars($search) ?>">
         <button type="submit"><i class="fa fa-search"></i></button>
       </div>
     </div>
   </form>
-  <!-- <section class="product"> -->
   <ul class="product-grid">
     <?php foreach ($products as $product): ?>
       <li class="product-item">
@@ -65,6 +64,8 @@ include_once 'templates/header.php'; ?>
     <?php endforeach; ?>
   </ul>
 </section>
+<div class="spacing"></div>
+<div class="whatsapp"><button><i class="fa-brands fa-whatsapp"></i></button></div>
 <script src="script.js"></script>
 <script>
   blockImages("product-imgs");

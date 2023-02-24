@@ -1,25 +1,25 @@
 <?php
 require_once 'config.php';
 
-if (!isset($_SESSION['login'])):
+if (!isset($_SESSION['login'])) :
   header('Location: login.php');
   exit();
 endif;
 
-if (!is_admin()):
+if (!is_admin()) :
   header('Location: product.php');
   exit();
 endif;
 
-if (isset($_POST['tambah'])):
-  if (addProduct($_POST)):
+if (isset($_POST['tambah'])) :
+  if (addProduct($_POST)) :
     // berhasil
     echo "<script>
             alert('Laman properti berhasil dibuat');
             location.href = 'product.php';
           </script>";
-  else:
-    // gagal
+  else :
+  // gagal
   endif;
 endif;
 
@@ -52,7 +52,7 @@ include_once 'templates/header.php';
           <div class="item">
             <label for="category_id"><strong>Pilih Kategori :</strong></label>
             <select class="form-select" name="category_id" id="category_id">
-              <?php foreach ($categories as $category): ?>
+              <?php foreach ($categories as $category) : ?>
                 <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
               <?php endforeach; ?>
             </select>
@@ -81,15 +81,14 @@ include_once 'templates/header.php';
       </form>
     </div>
   </div>
-</body>
 
-<!-- end content -->
-<script src="script.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    ckedit_desc();
-    ckedit_imgs();
-  });
-</script>
+  <!-- end content -->
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      ckedit_desc();
+      ckedit_imgs();
+    });
+  </script>
 
-<?php include_once 'templates/footer.php'; ?>
+  <?php include_once 'templates/footer.php'; ?>
